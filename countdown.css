@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.container {
+    margin: 20px;
+}
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+    width: 50px;
+    text-align: center;
+}
+
+button {
+    margin-left: 10px;
+}
+
+.timer {
+    font-size: 24px;
+    margin-top: 20px;
+}
