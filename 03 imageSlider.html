@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* Style for the container of the image slider */
+    .slider-container {
+      position: relative;
+      max-width: 800px; /* Adjust the width as needed */
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    /* Style for the slider images */
+    .slider-image {
+      width: 100%;
+      height: auto;
+      display: none;
+    }
+
+    /* Style for the monitor bar at the bottom */
+    .monitor-bar {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    /* Style for the monitor bar dots */
+    .monitor-dot {
+      width: 12px;
+      height: 12px;
+      margin: 0 5px;
+      border-radius: 50%;
+      background-color: #555;
+      cursor: pointer;
+    }
+
+    /* Style for the navigation arrows */
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 30px;
+      color: #555;
+    }
+
+    .slider-arrow.left {
+      left: 0;
+    }
+
+    .slider-arrow.right {
+      right: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="slider-container">
+    <img class="slider-image" src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=600" alt="Image 1">
+    <img class="slider-image" src="https://images.pexels.com/photos/3075993/pexels-photo-3075993.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Image 2">
+    <img class="slider-image" src="https://images.pexels.com/photos/4737484/pexels-photo-4737484.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Image 3">
+
+    <div class="monitor-bar">
+      <div class="monitor-dot" onclick="currentSlide(1)"></div>
+      <div class="monitor-dot" onclick="currentSlide(2)"></div>
+      <div class="monitor-dot" onclick="currentSlide(3)"></div>
+    </div>
+
+    <a class="slider-arrow left" onclick="plusSlides(-1)">&#9665;</a>
+    <a class="slider-arrow right" onclick="plusSlides(1)">&#9655;</a>
+  </div>
+
+  <script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {showSlides(slideIndex += n);}
+
+    function currentSlide(n) {showSlides(slideIndex = n);}
+
+    function showSlides(n) {
+      let i;
+      const slides = document.getElementsByClassName("slider-image");
+      const dots = document.getElementsByClassName("monitor-dot");
+
+      if (n > slides.length) {slideIndex = 1;}
+
+      if (n < 1) {slideIndex = slides.length;}
+
+      for (i = 0; i < slides.length; i++) {slides[i].style.display = "none";}
+
+      for (i = 0; i < dots.length; i++) {dots[i].style.backgroundColor = "#555";}
+
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].style.backgroundColor = "#007ACC";
+    }
+
+    // Auto-advance the slides every 4 seconds
+    setInterval(function() {
+      plusSlides(1);
+    }, 4000);
+  </script>
+</body>
+</html>
