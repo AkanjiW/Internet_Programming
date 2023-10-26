@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>User Registration</h1>
+    <form id="registrationForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <span id="nameError" class="error"></span>
+        
+        <br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+        <span id="passwordError" class="error"></span>
+
+        <br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            // Get the values from the form
+            var name = document.getElementById('name').value;
+            var password = document.getElementById('password').value;
+
+            // Initialize error flags
+            var nameError = false;
+            var passwordError = false;
+
+            // Validate name
+            if (name.trim() === '') {
+                nameError = true;
+                document.getElementById('nameError').textContent = 'Name cannot be empty';
+            } else {
+                document.getElementById('nameError').textContent = '';
+            }
+
+            // Validate password
+            if (password.length < 6) {
+                passwordError = true;
+                document.getElementById('passwordError').textContent = 'Password must be at least 6 characters long';
+            } else {
+                document.getElementById('passwordError').textContent = '';
+            }
+
+            // Prevent form submission if there are errors
+            if (nameError || passwordError) {
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
