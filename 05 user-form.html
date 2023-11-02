@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Form Validation</h1>
+    <form id="validationForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <span class="error" id="nameError"></span>
+        <br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <span class="error" id="passwordError"></span>
+        <br>
+
+        <label for="rePassword">Re-type Password:</label>
+        <input type="password" id="rePassword" name="rePassword" required>
+        <span class="error" id="rePasswordError"></span>
+        <br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <span class="error" id="emailError"></span>
+        <br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        const form = document.getElementById('validationForm');
+        const nameInput = document.getElementById('name');
+        const passwordInput = document.getElementById('password');
+        const rePasswordInput = document.getElementById('rePassword');
+        const emailInput = document.getElementById('email');
+
+        form.addEventListener('submit', function (e) {
+            let valid = true;
+
+            // Name validation
+            const nameError = document.getElementById('nameError');
+            if (nameInput.value === '') {
+                nameError.textContent = 'Name cannot be empty';
+                valid = false;
+            } else {
+                nameError.textContent = '';
+            }
+
+            // Password validation
+            const passwordError = document.getElementById('passwordError');
+            if (passwordInput.value.length < 6) {
+                passwordError.textContent = 'Password must be at least 6 characters long';
+                valid = false;
+            } else {
+                passwordError.textContent = '';
+            }
+
+            // Re-type password validation
+            const rePasswordError = document.getElementById('rePasswordError');
+            if (rePasswordInput.value !== passwordInput.value) {
+                rePasswordError.textContent = 'Passwords do not match';
+                valid = false;
+            } else {
+                rePasswordError.textContent = '';
+            }
+
+            // Email validation
+            const emailError = document.getElementById('emailError');
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(emailInput.value)) {
+                emailError.textContent = 'Invalid email format';
+                valid = false;
+            } else {
+                emailError.textContent = '';
+            }
+
+            if (!valid) {
+                e.preventDefault(); // Prevent form submission
+            }
+        });
+    </script>
+</body>
+</html>
